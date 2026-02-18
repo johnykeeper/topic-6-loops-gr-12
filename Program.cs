@@ -11,12 +11,11 @@ namespace topic_6__loops_gr_12
             {
                 Console.WriteLine("Menu");
                 Console.WriteLine("1 For Min/Max");
-                Console.WriteLine("2 For parking cost");
-                Console.WriteLine("3 For parking cost");
                 Console.WriteLine("q To end the program");
                 choice = Console.ReadLine().ToLower().Trim();
                 if (choice == "1")
                     minMax();
+                Console.Clear();
 
             }
         }
@@ -29,24 +28,33 @@ namespace topic_6__loops_gr_12
             Console.WriteLine("Give me a number to be the maximum");
             while (!Int32.TryParse(Console.ReadLine(), out Max))
                 Console.WriteLine("Invalid input");
-                if (Min > Max)
-                    Console.WriteLine("Your Max has to be bigger then your Min, press Enter to continue");
-                    Console.ReadLine();
-                    Console.Clear();
-                    minMax();
-            do
+            if (Min > Max)
             {
-                Console.WriteLine("Give me a number in between these two numbers");
+                Console.WriteLine("Your Max has to be bigger then your Min, press Enter to continue");
+                Console.ReadLine();
+                Console.Clear();
+                minMax();
+            }
+            while (true)
+            {
+                Console.WriteLine($"Give me a number in between {Min} and {Max}");
                 while (!Int32.TryParse(Console.ReadLine(), out Middle))
                     Console.WriteLine("Invalid input");
 
-                if (Middle > Max || Middle < Min)
+                if (Middle >= Max || Middle <= Min)
                 {
-                    Console.WriteLine("That number is not between the min and the max");
-
+                    Console.WriteLine($"That number is not between {Min} and {Max}");
+                    continue;
+                    
                 }
-            }while( Middle > Max ||  Middle < Min);
-            Console.WriteLine("good job! Press ENTER to continue");
+                if (Middle <= Max || Middle >= Min)
+                {
+                    Console.WriteLine("good job!");
+                    break;
+                }
+            }
+            Console.WriteLine("Press ENTER to continue");
+            Console.ReadLine();
             Console.Clear();
         }
        
