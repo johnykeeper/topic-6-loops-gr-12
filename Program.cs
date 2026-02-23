@@ -11,11 +11,14 @@ namespace topic_6__loops_gr_12
             {
                 Console.WriteLine("Menu");
                 Console.WriteLine("1 For Min/Max");
+                Console.WriteLine("2 For BoB");
                 Console.WriteLine("q To end the program");
                 choice = Console.ReadLine().ToLower().Trim();
                 if (choice == "1")
                     minMax();
-                Console.Clear();
+                else if (choice == "2")
+                    BoB();
+                    Console.Clear();
 
             }
         }
@@ -57,7 +60,54 @@ namespace topic_6__loops_gr_12
             Console.ReadLine();
             Console.Clear();
         }
-       
+        public static void BoB()
+        {
+            string choice = "";
+            double balance = 150;
+            double depositammount;
+            while (choice != "q")
+            {
+                Console.Clear();
+                Console.WriteLine("ATM menu, enter what you would like to do (there is a 0.75 cents fee for every transaction");
+                Console.WriteLine("Deposit");
+                Console.WriteLine("withdrawal");
+                Console.WriteLine("Bill Payment");
+                Console.WriteLine("account balance");
+                Console.WriteLine("q To go back to main menu");
+                choice = Console.ReadLine().ToLower().Trim();
+                Console.Clear();
+                if (choice == "deposit")
+                {
+                    Console.WriteLine("How much would you like to deposit?");
+                    while (!double.TryParse(Console.ReadLine(), out depositammount))
+                        Console.WriteLine("Invalid input");
+                    Console.WriteLine($"your balance is now " +  (depositammount + balance - 0.75).ToString("C"));
+                    Console.WriteLine("press Enter to go back to bank menu");
+                    Console.ReadLine();
+
+
+                }
+                else if (choice == "withdrawal")
+                {
+
+                }
+                else if (choice == "bill payment")
+                {
+
+                }
+                else if (choice == "account balance")
+                {
+
+                }
+                else if (choice == "w")
+                    BoB();
+                Console.Clear();
+
+            }
+        }
+     
+
+
 
     }
 }
