@@ -64,11 +64,11 @@ namespace topic_6__loops_gr_12
         {
             string choice = "";
             double balance = 150;
-            double depositammount;
+            double depositammount, withdrawammount, paymentAmmount;
             while (choice != "q")
             {
                 Console.Clear();
-                Console.WriteLine("ATM menu, enter what you would like to do (there is a 0.75 cents fee for every transaction");
+                Console.WriteLine("ATM menu, enter what you would like to do (there is a 0.75 cents fee for every transaction)");
                 Console.WriteLine("Deposit");
                 Console.WriteLine("withdrawal");
                 Console.WriteLine("Bill Payment");
@@ -76,31 +76,98 @@ namespace topic_6__loops_gr_12
                 Console.WriteLine("q To go back to main menu");
                 choice = Console.ReadLine().ToLower().Trim();
                 Console.Clear();
-                if (choice == "deposit")
+                if(balance < 0.75 && choice != "deposit")
+                {
+                    Console.WriteLine("Your balance is lower then the transaction fee of 75 cents, that's sad");
+                    Console.WriteLine("Press ENTER to continue");
+                    Console.ReadLine();
+                    Console.Clear();
+
+                }
+                else if (choice == "deposit")
                 {
                     Console.WriteLine("How much would you like to deposit?");
                     while (!double.TryParse(Console.ReadLine(), out depositammount))
                         Console.WriteLine("Invalid input");
-                    Console.WriteLine($"your balance is now " +  (depositammount + balance - 0.75).ToString("C"));
-                    Console.WriteLine("press Enter to go back to bank menu");
-                    Console.ReadLine();
+                    if ((balance + depositammount) < 0.75)
+                    {
+                        balance = balance - balance;
+                        Console.WriteLine("you cannot afford the transaction fee");
+                        Console.WriteLine("your balance is now " + balance.ToString("C"));
+                        Console.WriteLine("Press ENTER to continue");
+                        Console.ReadLine();
+                        Console.Clear();
+                    }
+                    else if ((balance + depositammount) >= 0.75)
+                    {
+                        balance = balance + depositammount - 0.75;
+
+                        Console.WriteLine($"your balance is now " + balance.ToString("C"));
+                        Console.WriteLine("press Enter to go back to bank menu");
+                        Console.ReadLine();
+                    }
+
 
 
                 }
                 else if (choice == "withdrawal")
                 {
-
+                    Console.WriteLine("How much would you like to withdraw?");
+                    while (!double.TryParse(Console.ReadLine(), out withdrawammount))
+                        Console.WriteLine("Invalid input");
+                    if (withdrawammount <= (balance - 0.75))
+                    {
+                        balance = balance - withdrawammount - 0.75;
+                        Console.WriteLine($"your balance is now " + balance.ToString("C"));
+                        Console.WriteLine("press Enter to go back to bank menu");
+                        Console.ReadLine();
+                    }
+                    else if(withdrawammount > (balance - 0.75))
+                    {
+                        balance -= 0.75;
+                        Console.WriteLine("You can't withdraw more than " + balance.ToString("C"));
+                        Console.WriteLine("You have been charged $0.75 for this transaction");
+                        Console.WriteLine("Press Enter to continue");
+                        Console.ReadLine();
+                        Console.Clear ();
+                    }
                 }
                 else if (choice == "bill payment")
                 {
+                    Console.WriteLine("How much do you owe?");
+                    while (!double.TryParse(Console.ReadLine(), out paymentAmmount))
+                        Console.WriteLine("Invalid input");
+                    if (paymentAmmount <= (balance - 0.75))
+                    {
+                        balance = balance - paymentAmmount - 0.75;
+                        Console.WriteLine($"you paid {paymentAmmount:C} your balance is now {balance:C}");
+
+                        Console.WriteLine("press Enter to go back to bank menu");
+                        Console.ReadLine();
+                    }
+                    else if (paymentAmmount > (balance - 0.75))
+                    {
+                        balance -= 0.75;
+                        Console.WriteLine("You can't afford to pay more than " + balance.ToString("C"));
+                        Console.WriteLine("You have been charged $0.75 for this transaction");
+                        Console.WriteLine("Press Enter to continue");
+                        Console.ReadLine();
+                        Console.Clear();
+                    }
 
                 }
                 else if (choice == "account balance")
                 {
-
+                    Console.WriteLine($"you have {balance} in your account, you will be charged 75 cents for this transaction");
+                    balance = balance - 0.75;
+                    Console.WriteLine("press ENTER to go back to the menu");
+                    Console.ReadLine();
                 }
-                else if (choice == "w")
-                    BoB();
+                else
+                {
+                    Console.WriteLine("wrong menu input, press ENTER to go back");
+                    Console.ReadLine();
+                }
                 Console.Clear();
 
             }
