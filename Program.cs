@@ -12,13 +12,16 @@ namespace topic_6__loops_gr_12
                 Console.WriteLine("Menu");
                 Console.WriteLine("1 For Min/Max");
                 Console.WriteLine("2 For BoB");
+                Console.WriteLine("3 For dice");
                 Console.WriteLine("q To end the program");
                 choice = Console.ReadLine().ToLower().Trim();
                 if (choice == "1")
                     minMax();
                 else if (choice == "2")
                     BoB();
-                    Console.Clear();
+                else if (choice == "3")
+                    Dice();
+                Console.Clear();
 
             }
         }
@@ -172,7 +175,29 @@ namespace topic_6__loops_gr_12
 
             }
         }
-     
+        public static void Dice()
+        {
+            Random generator = new Random();
+            int Dice1,Dice2;
+            Console.WriteLine("Press enter to roll two dice until it has rolled doubles");
+            Console.ReadLine() ;
+            Dice1 = 0;
+            Dice2 = 1;
+            int attemps = 0;
+            while (Dice1 != Dice2)
+            {
+                Dice1 = generator.Next(1, 7);
+                Dice2 = generator.Next(1, 7);
+                attemps++;
+                Console.WriteLine($"{Dice1},{Dice2}");
+            }
+            Console.WriteLine($"it took {attemps} rolls to get doubles");
+
+            Console.WriteLine("Press ENTER to continue");
+            Console.ReadLine();
+            
+        }
+
 
 
 
