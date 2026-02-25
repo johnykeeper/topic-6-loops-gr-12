@@ -79,7 +79,7 @@ namespace topic_6__loops_gr_12
                 Console.WriteLine("q To go back to main menu");
                 choice = Console.ReadLine().ToLower().Trim();
                 Console.Clear();
-                if(balance < 0.75 && choice != "deposit")
+                if (balance < 0.75 && choice != "deposit")
                 {
                     Console.WriteLine("Your balance is lower then the transaction fee of 75 cents, that's sad");
                     Console.WriteLine("Press ENTER to continue");
@@ -125,14 +125,14 @@ namespace topic_6__loops_gr_12
                         Console.WriteLine("press Enter to go back to bank menu");
                         Console.ReadLine();
                     }
-                    else if(withdrawammount > (balance - 0.75))
+                    else if (withdrawammount > (balance - 0.75))
                     {
                         balance -= 0.75;
                         Console.WriteLine("You can't withdraw more than " + balance.ToString("C"));
                         Console.WriteLine("You have been charged $0.75 for this transaction");
                         Console.WriteLine("Press Enter to continue");
                         Console.ReadLine();
-                        Console.Clear ();
+                        Console.Clear();
                     }
                 }
                 else if (choice == "bill payment")
@@ -166,7 +166,7 @@ namespace topic_6__loops_gr_12
                     Console.WriteLine("press ENTER to go back to the menu");
                     Console.ReadLine();
                 }
-                else
+                else if (choice != "q")
                 {
                     Console.WriteLine("wrong menu input, press ENTER to go back");
                     Console.ReadLine();
